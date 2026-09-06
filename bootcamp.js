@@ -14,7 +14,7 @@ function onDrop(source, target) {
   let move = game.move({ from: source, to: target, promotion: 'q' });
   if (move === null) return 'snapback';
 
-  updateInstructor();
+  updateInstructor('You moved: ' + move.san);
   setTimeout(stockfishMove, 200);
 }
 
@@ -27,25 +27,11 @@ function stockfishMove() {
       let move = e.data.split(' ')[1];
       game.move(move);
       board.position(game.fen());
-      updateInstructor();
+      updateInstructor('Stockfish plays: ' + move);
     }
   };
 }
 
-function updateInstructor() {
-  let moves = game.moves({ verbose: true });
-  let msg = 'Make your move, soldier.';
-
-  for (let m of moves) {
-    let temp = new Chess(game.fen());
-    temp.move(m);
-    let attacks = temp.moves({ verbose: true }).filter(x => x.captured);
-    if (attacks.length >= 2) {
-      msg = 'This is a fork, soldier! Wins you material!';
-      break;
-    }
-    if (attacks.length === 1) msg = 'You can win material here!';
-  }
-
+function updateInstructor(msg) {
   document.getElementById('message').innerText = msg;
 }
