@@ -4,11 +4,16 @@
   <title>Bootcamp Chess</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- Chess logic -->
+  <!-- Chess logic (must load first) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.13.4/chess.min.js"></script>
 
-  <!-- Chessboard UI (working cdnjs version) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
+  <!-- Prevent chessboard-js from auto-loading wrong chess.js -->
+  <script>
+    window.Chess = window.Chess || Chess;
+  </script>
+
+  <!-- Chessboard UI (load AFTER chess.js) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
 </head>
 
