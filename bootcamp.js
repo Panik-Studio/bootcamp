@@ -1,4 +1,3 @@
-
 // Load Stockfish worker
 let wasmSupported = typeof WebAssembly === 'object';
 let engine = new Worker(wasmSupported ? 'stockfish.wasm.js' : 'stockfish.js');
